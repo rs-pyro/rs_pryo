@@ -1,0 +1,11 @@
+[package]
+name = "rs_pyro"
+version = "0.0.1"
+edition = "2021"
+authors = ["Jonathan Paul Wolfe: rspyrocrate@gmail.com"]
+description = "machine learning"
+license = "LGPL-3.0"
+repository = "https://github.com/rs-pyro/rs_pyro.git"
+readme = "README.md"
+
+[dependencies]
