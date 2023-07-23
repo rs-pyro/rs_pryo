@@ -9,3 +9,4 @@ repository = "https://github.com/rs-pyro/rs_pyro.git"
 readme = "README.md"
 
 [dependencies]
+plotters = "0.3.5"
