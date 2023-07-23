@@ -1,3 +1,4 @@
+use std::error::Error;
 use plotters::backend::BitMapBackend;
 use plotters::chart::ChartBuilder;
 use plotters::style::full_palette::{RED, BLUE, WHITE};
@@ -32,7 +33,7 @@ pub(crate) struct LinearRegression{
 }
 impl LinearRegression {
     pub(crate) fn new(data : &[DataPoint]) ->Self{
-        LinearRegression{
+        let mut model = LinearRegression{
             data: Box::new(data.to_vec()),
             coefficient: 0.0,
             intercept: 0.0,
@@ -44,10 +45,17 @@ impl LinearRegression {
             multicollinearity: 0.0,
             outliers: 0.0,
             homoscedasticity: 0.0,
-        }
+        };
+        model.calc_slope_intercept();
+        model
+
     }
+    pub(crate) fn get_slope_intercept(&self) -> (f64,f64){
+        (self.coefficient,self.intercept)
+    }
+
     // Function to calculate the linear regression coefficients
-    pub(crate) fn get_slope_intercept(&mut self) -> (f64, f64) {
+        fn calc_slope_intercept(&mut self){
         let n = self.data.len() as f64;
         let x_sum: f64 = self.data.iter().map(|p| p.x).sum();
         let y_sum: f64 = self.data.iter().map(|p| p.y).sum();
@@ -57,9 +65,7 @@ impl LinearRegression {
         self.coefficient = (n * xy_sum - x_sum * y_sum) / (n * x_squared_sum - x_sum * x_sum);
         self.intercept = (y_sum - self.coefficient * x_sum) / n;
 
-        (self.coefficient, self.intercept)
     }
-
 
 // Function to plot the data and the linear regression line
 
