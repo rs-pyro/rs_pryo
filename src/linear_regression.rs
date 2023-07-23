@@ -55,7 +55,7 @@ impl LinearRegression {
     }
 
     // Function to calculate the linear regression coefficients
-        fn calc_slope_intercept(&mut self){
+        fn calc_slope_intercept(&mut self)->Result<(), Box<dyn std::error::Error>> {
         let n = self.data.len() as f64;
         let x_sum: f64 = self.data.iter().map(|p| p.x).sum();
         let y_sum: f64 = self.data.iter().map(|p| p.y).sum();
@@ -64,6 +64,7 @@ impl LinearRegression {
 
         self.coefficient = (n * xy_sum - x_sum * y_sum) / (n * x_squared_sum - x_sum * x_sum);
         self.intercept = (y_sum - self.coefficient * x_sum) / n;
+        Ok(())
 
     }
 
@@ -77,7 +78,7 @@ impl LinearRegression {
         x_label: &str,
         y_label: &str,
         output_file: &str,
-    ) -> Result<(), Box<dyn std::error::Error>> {
+    ) -> Result<(), Box<dyn Error>> {
         // Create a plotter area
         let output_file = &format!("./images/plots/{}", output_file);
         let root = BitMapBackend::new(output_file, (1600, 1200)).into_drawing_area();
