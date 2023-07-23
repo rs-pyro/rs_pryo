@@ -1,6 +1,6 @@
 [package]
 name = "rs_pyro"
-version = "0.0.1"
+version = "0.0.0"
 edition = "2021"
 authors = ["Jonathan Paul Wolfe: rspyrocrate@gmail.com"]
 description = "machine learning"
