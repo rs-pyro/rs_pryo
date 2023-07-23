@@ -32,7 +32,7 @@ pub(crate) struct LinearRegression{
     homoscedasticity:f64,
 }
 impl LinearRegression {
-    pub(crate) fn new(data : &[DataPoint]) ->Self{
+    pub(crate) fn new(data : &Vec<DataPoint>) ->Self{
         let mut model = LinearRegression{
             data: Box::new(data.to_vec()),
             coefficient: 0.0,
@@ -71,7 +71,6 @@ impl LinearRegression {
 
     pub(crate) fn plot_data_with_regression(
         self: &Self,
-        data: &[DataPoint],
         slope: f64,
         intercept: f64,
         plot_title: &str,
@@ -94,7 +93,7 @@ impl LinearRegression {
         // Draw the scatter plot
         chart.configure_mesh().draw()?;
         chart.draw_series(PointSeries::of_element(
-            data.iter().map(|p| (p.x, p.y)),
+            self.data.iter().map(|p| (p.x, p.y)),
             5,
             &BLUE,
             &|c, s, st| {

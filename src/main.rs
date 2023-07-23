@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         DataPoint::new(3.2, 4.8 ),
         DataPoint::new(4.8, 5.3 ),
     ];
-    let mut lr = LinearRegression::new(&data);
+    let lr = LinearRegression::new(&data);
     // Calculate the linear regression coefficients
     let (slope, intercept) = lr.get_slope_intercept();
 
@@ -27,7 +27,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Plot the data with the linear regression line
     lr.plot_data_with_regression(
-        &data,
         slope,
         intercept,
         "Scatter Plot with Linear Regression",
